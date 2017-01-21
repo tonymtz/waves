@@ -12,16 +12,16 @@ public class Player : MonoBehaviour
 
     private bool canAction;
 
-    void Awake()
+    private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    private void Update()
     {
         float axisHorizontal = Input.GetAxis("Horizontal");
         float axisVertical = Input.GetAxis("Vertical");
-        bool isActionButton = Input.GetButton("Action");
+        bool isActionButton = Input.GetButtonDown("Action");
 
         Move(axisHorizontal, axisVertical);
 
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Move(float axisHorizontal, float axisVertical)
+    private void Move(float axisHorizontal, float axisVertical)
     {
         Vector3 newDir = Vector3.RotateTowards(transform.forward, new Vector3(axisHorizontal, 0f, axisVertical), rotatingSpeed * Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
@@ -55,14 +55,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Action()
+    private void Action()
     {
         canAction = false;
         Invoke("HideWeapon", 0.5f);
+        Debug.Log("Act like a monkey!");
     }
 
     private void HideWeapon()
     {
         canAction = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "LyingGuy")
+        {
+            other.GetComponent<LyingGuy>().Complain();
+        }
+        else if (other.gameObject.layer == 10) // Trash
+        {
+            // other.GetComponent<Trash>();
+        }
     }
 }

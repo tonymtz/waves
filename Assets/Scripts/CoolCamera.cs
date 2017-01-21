@@ -15,7 +15,7 @@ public class CoolCamera : MonoBehaviour
         offset = transform.position - target.transform.position;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         Vector3 desiredPosition = target.transform.position + offset;
         Vector3 position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * damping);
