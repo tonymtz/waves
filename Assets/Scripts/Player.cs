@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private PlayController WC;
 
+    [SerializeField]
+    private CoolCamera myCoolCamera;
+
     private Rigidbody myRigidbody;
 
     private bool isActioning;

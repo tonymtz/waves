@@ -1744,6 +1744,7 @@ MonoBehaviour:
   movementSpeed: 500
   rotatingSpeed: 10
   WC: {fileID: 460015865}
+  myCoolCamera: {fileID: 2023403903}
   backpackCapacity: 5
   myAnimator: {fileID: 453272105}
 --- !u!114 &561125407
@@ -5225,6 +5226,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1090432046307362, guid: 8f5841087a6ae4c48aea43952f9c8945,
         type: 2}
+    - target: {fileID: 114483221487266552, guid: f0015edfc0a45d041853fd419c6898c1,
+        type: 2}
+      propertyPath: backgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: 0782d52a569ffa04e9617a84173582f1, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0015edfc0a45d041853fd419c6898c1, type: 2}
   m_IsPrefabParent: 0
@@ -7183,6 +7189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 561125402}
   damping: 1
+  offset: {x: 0, y: 0, z: 0}
+  modifier: {x: 0, y: 0, z: 0}
 --- !u!4 &2033519685 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4421639277593456, guid: c3cde65f32b2f8b4995809d32c7b4f3e,

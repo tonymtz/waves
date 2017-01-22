@@ -68,6 +68,7 @@ public class AudioManager : MonoBehaviour
         }
         myMusicPlayer.Stop();
         myMusicPlayer.clip = music;
+        myMusicPlayer.volume = 0.3f;
         myMusicPlayer.Play();
         myMusicPlayer.loop = true;
     }

@@ -35,4 +35,9 @@ public class GameSoundsController : MonoBehaviour
     {
         AM.PlaySound(gameOverSound);
     }
+
+    public void PlayBackground()
+    {
+        AM.PlayMusic(backgroundMusic);
+    }
 }

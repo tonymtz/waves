@@ -101,6 +101,8 @@ public class PlayController : MonoBehaviour
         isTimerPaused = false;
         trashInWorld = 0;
         FinishRound();
+
+        mySoundsController.PlayBackground();
     }
 
     private void Update()
