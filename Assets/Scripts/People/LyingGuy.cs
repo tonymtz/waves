@@ -2,26 +2,24 @@
 
 public class LyingGuy : RandomPerson
 {
-    [SerializeField]
     private bool isComplaining;
+
+    private Animator myAnimator;
 
     void Awake()
     {
-        isTimerPaused = true;
-    }
-
-    void Update()
-    {
-
-    }
-
-    protected override void Digest()
-    {
-        isComplaining = false;
+        myAnimator = GetComponent<Animator>();
     }
 
     public void Complain()
     {
         isComplaining = true;
+        myAnimator.SetTrigger("Upset");
+        Invoke("Teardown", 1.24f);
+    }
+
+    private void Teardown()
+    {
+        isComplaining = false;
     }
 }

@@ -51,9 +51,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d713dc104d283364693840c89b1cd6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levels:
+  - trashToThrow: 5
+    timeBetweenWaves: 18
+    wavesBeforeNextLvl: 3
+  - trashToThrow: 6
+    timeBetweenWaves: 15
+    wavesBeforeNextLvl: 3
+  - trashToThrow: 7
+    timeBetweenWaves: 12
+    wavesBeforeNextLvl: 3
+  - trashToThrow: 8
+    timeBetweenWaves: 10
+    wavesBeforeNextLvl: 3
+  - trashToThrow: 9
+    timeBetweenWaves: 9
+    wavesBeforeNextLvl: 0
+  PLAYER: {fileID: 0}
   water: {fileID: 0}
   trashCollection:
-  - {fileID: 1276828462970020, guid: eb6198e0156dd1844a8d9273362854f9, type: 2}
+  - {fileID: 1876316781438114, guid: 4e0f92133b689004f9b52fcfbbd1a879, type: 2}
+  - {fileID: 1163798194141640, guid: f8c63b8df33f7be4580c03b79110f8fb, type: 2}
+  - {fileID: 1438949646567104, guid: 7a869d44e400bea42b0757a220a5f127, type: 2}
+  - {fileID: 1227688601231190, guid: 5db7b5d45d5d06046a34e24cd4e613b4, type: 2}
   trashWaveSize: 5
   isTimerPaused: 1
   digestTime: 30

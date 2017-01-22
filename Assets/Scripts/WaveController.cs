@@ -5,6 +5,9 @@ public class WaveController : MonoBehaviour
     [SerializeField]
     private Level[] levels;
 
+    [SerializeField]
+    private Player PLAYER;
+
     private int currentLevel = -1;
 
     private int wavesCounter = 0;
@@ -27,6 +30,8 @@ public class WaveController : MonoBehaviour
     private int trashInWorld;
 
     private float timeleft;
+
+    private bool isGameOver;
 
     public int TrashInWorld
     {
@@ -121,6 +126,19 @@ public class WaveController : MonoBehaviour
         trashWaveSize = myLevel.trashToThrow;
         digestTime = myLevel.timeBetweenWaves;
         wavesCounter = 0;
+    }
+
+    private void RestartScene()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void GameOver()
+    {
+        if (isGameOver) { return; }
+        isGameOver = true;
+        PLAYER.GameOver();
+        Invoke("RestartScene", 4f);
     }
 
     [System.Serializable]

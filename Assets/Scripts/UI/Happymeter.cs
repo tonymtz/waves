@@ -18,6 +18,14 @@ public class Happymeter : MonoBehaviour
 
     private void LateUpdate()
     {
-        mySlider.value = maxHappiness - WC.TrashInWorld;
+        int newValue = maxHappiness - WC.TrashInWorld;
+        mySlider.value = newValue;
+
+        Debug.Log(newValue);
+
+        if (newValue <= 0)
+        {
+            WC.GameOver();
+        }
     }
 }

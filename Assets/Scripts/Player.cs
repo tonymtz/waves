@@ -13,11 +13,14 @@ public class Player : MonoBehaviour
 
     private Rigidbody myRigidbody;
 
-    private bool canAction;
+    private bool isActioning;
 
     private GameObject itemSelected;
 
     private int garbageCollected;
+
+    [SerializeField]
+    private Animator myAnimator;
 
     public int GarbageCollected
     {
@@ -38,11 +41,15 @@ public class Player : MonoBehaviour
         float axisVertical = Input.GetAxis("Vertical");
         bool isActionButton = Input.GetButtonDown("Action");
 
-        Move(axisHorizontal, axisVertical);
+        if (isActioning) { return; }
 
         if (isActionButton)
         {
             Action();
+        }
+        else
+        {
+            Move(axisHorizontal, axisVertical);
         }
     }
 
@@ -50,6 +57,7 @@ public class Player : MonoBehaviour
     {
         Vector3 newDir = Vector3.RotateTowards(transform.forward, new Vector3(axisHorizontal, 0f, axisVertical), rotatingSpeed * Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
+        bool isMoving = false;
 
         if (axisHorizontal != 0f)
         {
@@ -58,6 +66,7 @@ public class Player : MonoBehaviour
                 myRigidbody.velocity.y,
                 myRigidbody.velocity.z
             );
+            isMoving = true;
         }
 
         if (axisVertical != 0f)
@@ -67,13 +76,20 @@ public class Player : MonoBehaviour
                 myRigidbody.velocity.y,
                 axisVertical * movementSpeed * Time.deltaTime
             );
+            isMoving = true;
         }
+
+        myAnimator.SetBool("IsRunning", isMoving);
     }
 
     private void Action()
     {
-        canAction = false;
-        Invoke("ActionTeardown", 0.5f);
+        myRigidbody.velocity = Vector3.zero;
+        myAnimator.SetBool("IsRunning", false);
+        myAnimator.SetTrigger("StartAttack");
+
+        isActioning = true;
+        Invoke("ActionTeardown", 0.25f);
 
         if (itemSelected && garbageCollected < 11)
         {
@@ -85,7 +101,7 @@ public class Player : MonoBehaviour
 
     private void ActionTeardown()
     {
-        canAction = true;
+        isActioning = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -114,5 +130,11 @@ public class Player : MonoBehaviour
         {
             itemSelected = null;
         }
+    }
+
+    public void GameOver()
+    {
+        isActioning = true;
+        myAnimator.SetTrigger("StartLose");
     }
 }
