@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4246399863180642}
   - component: {fileID: 114009880189666164}
+  - component: {fileID: 114483221487266552}
   m_Layer: 0
   m_Name: PlayController
   m_TagString: Untagged
@@ -53,19 +54,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - trashToThrow: 5
-    timeBetweenWaves: 18
-    wavesBeforeNextLvl: 3
-  - trashToThrow: 6
     timeBetweenWaves: 15
     wavesBeforeNextLvl: 3
+  - trashToThrow: 6
+    timeBetweenWaves: 14
+    wavesBeforeNextLvl: 3
   - trashToThrow: 7
-    timeBetweenWaves: 12
+    timeBetweenWaves: 13
     wavesBeforeNextLvl: 3
   - trashToThrow: 8
-    timeBetweenWaves: 10
+    timeBetweenWaves: 12
     wavesBeforeNextLvl: 3
   - trashToThrow: 9
-    timeBetweenWaves: 9
+    timeBetweenWaves: 11
     wavesBeforeNextLvl: 0
   PLAYER: {fileID: 0}
   water: {fileID: 0}
@@ -77,3 +78,15 @@ MonoBehaviour:
   trashWaveSize: 5
   isTimerPaused: 1
   digestTime: 30
+  happinessAdded: 0
+--- !u!114 &114483221487266552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1452602959131324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922482f486c6f5846bf6307e20891949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

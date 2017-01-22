@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WaveController : MonoBehaviour
+public class PlayController : MonoBehaviour
 {
     [SerializeField]
     private Level[] levels;

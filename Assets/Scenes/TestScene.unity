@@ -1694,6 +1694,7 @@ GameObject:
   - component: {fileID: 561125404}
   - component: {fileID: 561125403}
   - component: {fileID: 561125406}
+  - component: {fileID: 561125407}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1761,6 +1762,22 @@ MonoBehaviour:
   WC: {fileID: 460015865}
   backpackCapacity: 5
   myAnimator: {fileID: 453272105}
+--- !u!114 &561125407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 561125402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d254d10f148cded4f826493c527b538c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickPowerupSound: {fileID: 8300000, guid: d271083c499a9be41a5455e1fd754870, type: 3}
+  pickTrashSound: {fileID: 8300000, guid: e60e0658f3116f042a0584c5de9342ab, type: 3}
+  tossGarbageSound: {fileID: 0}
+  attackSound: {fileID: 0}
+  randomComplainSound: {fileID: 0}
 --- !u!1 &587755899
 GameObject:
   m_ObjectHideFlags: 0
@@ -5269,10 +5286,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1452602959131324, guid: f0015edfc0a45d041853fd419c6898c1, type: 2}
-      propertyPath: m_Name
-      value: WaveController
-      objectReference: {fileID: 0}
     - target: {fileID: 114009880189666164, guid: f0015edfc0a45d041853fd419c6898c1,
         type: 2}
       propertyPath: PLAYER
@@ -5283,31 +5296,6 @@ Prefab:
       propertyPath: water
       value: 
       objectReference: {fileID: 534514058}
-    - target: {fileID: 114009880189666164, guid: f0015edfc0a45d041853fd419c6898c1,
-        type: 2}
-      propertyPath: levels.Array.data[0].timeBetweenWaves
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 114009880189666164, guid: f0015edfc0a45d041853fd419c6898c1,
-        type: 2}
-      propertyPath: levels.Array.data[1].timeBetweenWaves
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 114009880189666164, guid: f0015edfc0a45d041853fd419c6898c1,
-        type: 2}
-      propertyPath: levels.Array.data[2].timeBetweenWaves
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 114009880189666164, guid: f0015edfc0a45d041853fd419c6898c1,
-        type: 2}
-      propertyPath: levels.Array.data[3].timeBetweenWaves
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114009880189666164, guid: f0015edfc0a45d041853fd419c6898c1,
-        type: 2}
-      propertyPath: levels.Array.data[4].timeBetweenWaves
-      value: 11
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f0015edfc0a45d041853fd419c6898c1, type: 2}
   m_IsPrefabParent: 0

@@ -3,7 +3,7 @@
 public class StartDialog : MonoBehaviour
 {
     [SerializeField]
-    private WaveController WC;
+    private PlayController WC;
 
     private void LateUpdate()
     {

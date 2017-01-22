@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class WavemeterUI : MonoBehaviour
 {
     [SerializeField]
-    private WaveController WC;
+    private PlayController WC;
 
     private Slider mySlider;
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class Happymeter : MonoBehaviour
 {
     [SerializeField]
-    private WaveController WC;
+    private PlayController WC;
 
     [SerializeField]
     private int maxHappiness = 20;

@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     private float rotatingSpeed = 5f;
 
     [SerializeField]
-    private WaveController WC;
+    private PlayController WC;
 
     private Rigidbody myRigidbody;
 
@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private Animator myAnimator;
+
+    private PlayerSound myPlayerSound;
 
     public int GarbageCollected
     {
@@ -54,6 +56,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
+        myPlayerSound = GetComponent<PlayerSound>();
     }
 
     private void Update()
@@ -120,6 +123,11 @@ public class Player : MonoBehaviour
             Destroy(itemSelected);
             WC.TrashInWorld--;
             garbageCollected++;
+            myPlayerSound.PickTrash();
+        }
+        else
+        {
+            myPlayerSound.Attack();
         }
     }
 
@@ -140,25 +148,30 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "TrashCan")
         {
             garbageCollected = 0;
+            myPlayerSound.TossGarbage();
         }
         else if (other.gameObject.tag == "LyingGuy")
         {
             other.GetComponent<LyingGuy>().Complain();
+            myPlayerSound.RandomComplain();
         }
         else if (other.gameObject.tag == "Coin")
         {
             WC.HappinessAdded++;
             Destroy(other.gameObject);
+            myPlayerSound.PickPowerup();
         }
         else if (other.gameObject.tag == "Flipflops")
         {
             speedAdded++;
             Destroy(other.gameObject);
+            myPlayerSound.PickPowerup();
         }
         else if (other.gameObject.tag == "Backpack")
         {
             backpackCapacity++;
             Destroy(other.gameObject);
+            myPlayerSound.PickPowerup();
         }
     }
 
