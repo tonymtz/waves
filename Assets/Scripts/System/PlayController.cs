@@ -20,6 +20,9 @@ public class PlayController : MonoBehaviour
     private GameObject[] trashCollection;
 
     [SerializeField]
+    private GameObject[] powerupCollection;
+
+    [SerializeField]
     private int trashWaveSize = 5;
 
     [SerializeField]
@@ -38,6 +41,8 @@ public class PlayController : MonoBehaviour
     private bool isGameOver;
 
     private bool hasGameStarted;
+
+    private GameSoundsController mySoundsController;
 
     public int TrashInWorld
     {
@@ -91,6 +96,8 @@ public class PlayController : MonoBehaviour
 
     private void Awake()
     {
+        mySoundsController = GetComponent<GameSoundsController>();
+
         isTimerPaused = false;
         trashInWorld = 0;
         FinishRound();
@@ -104,6 +111,8 @@ public class PlayController : MonoBehaviour
             {
                 hasGameStarted = true;
             }
+
+            mySoundsController.StartGame();
 
             return;
         }
@@ -131,6 +140,7 @@ public class PlayController : MonoBehaviour
     private void Digest()
     {
         water.IsHighTide = true;
+        mySoundsController.HighTide();
         Invoke("SpawnTrash", 3f);
         Invoke("ResetWater", 3.5f);
     }
@@ -143,6 +153,9 @@ public class PlayController : MonoBehaviour
             GameObject newTrash = Instantiate(trashCollection[Random.Range(0, trashCollection.Length)]);
             newTrash.transform.position = randomPoint;
         }
+
+        GameObject newPowerUp = Instantiate(powerupCollection[Random.Range(0, powerupCollection.Length)]);
+        newPowerUp.transform.position = new Vector3(Random.Range(48, 95), 4f, Random.Range(99, 124));
 
         trashInWorld += trashWaveSize;
     }
@@ -182,6 +195,7 @@ public class PlayController : MonoBehaviour
     public void GameOver()
     {
         if (isGameOver) { return; }
+        mySoundsController.GameOver();
         isGameOver = true;
         PLAYER.GameOver();
     }
