@@ -14,9 +14,10 @@ public class Trash : MonoBehaviour
 
     }
 
-    public void ToggleShader() {
-        if (isSelected) {
-            //renderer.material.shader = Shader.Find("Self-Illumin/Outlined Diffuse");
+    public void ToggleShader()
+    {
+        if (isSelected)
+        {
         }
     }
 }

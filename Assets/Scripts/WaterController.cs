@@ -13,6 +13,19 @@ public class WaterController : MonoBehaviour
 
     private float baseHeight;
 
+    public bool IsHighTide
+    {
+        get
+        {
+            return isHighTide;
+        }
+
+        set
+        {
+            isHighTide = value;
+        }
+    }
+
     // Use this for initialization
     void Awake()
     {

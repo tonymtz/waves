@@ -8,9 +8,24 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float rotatingSpeed = 5f;
 
+    [SerializeField]
+    private WaveController WC;
+
     private Rigidbody myRigidbody;
 
     private bool canAction;
+
+    private GameObject itemSelected;
+
+    private int garbageCollected;
+
+    public int GarbageCollected
+    {
+        get
+        {
+            return garbageCollected;
+        }
+    }
 
     private void Awake()
     {
@@ -58,11 +73,17 @@ public class Player : MonoBehaviour
     private void Action()
     {
         canAction = false;
-        Invoke("HideWeapon", 0.5f);
-        Debug.Log("Act like a monkey!");
+        Invoke("ActionTeardown", 0.5f);
+
+        if (itemSelected && garbageCollected < 11)
+        {
+            Destroy(itemSelected);
+            WC.TrashInWorld--;
+            garbageCollected++;
+        }
     }
 
-    private void HideWeapon()
+    private void ActionTeardown()
     {
         canAction = true;
     }
@@ -75,7 +96,19 @@ public class Player : MonoBehaviour
         }
         else if (other.gameObject.layer == 10) // Trash
         {
-            // other.GetComponent<Trash>();
+            if (itemSelected == null)
+            {
+                itemSelected = other.gameObject;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 10 && // Trash
+            other.gameObject == itemSelected)
+        {
+            itemSelected = null;
         }
     }
 }
