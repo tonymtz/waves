@@ -94,7 +94,7 @@ public class PlayController : MonoBehaviour
         }
     }
 
-    private void Awake()
+    private void Start()
     {
         mySoundsController = GetComponent<GameSoundsController>();
 
@@ -113,8 +113,6 @@ public class PlayController : MonoBehaviour
             {
                 hasGameStarted = true;
             }
-
-            mySoundsController.StartGame();
 
             return;
         }

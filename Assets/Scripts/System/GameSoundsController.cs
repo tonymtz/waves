@@ -9,9 +9,6 @@ public class GameSoundsController : MonoBehaviour
     private AudioClip highTideSound;
 
     [SerializeField]
-    private AudioClip startGameSound;
-
-    [SerializeField]
     private AudioClip gameOverSound;
 
     private AudioManager AM;
@@ -24,12 +21,7 @@ public class GameSoundsController : MonoBehaviour
     public void HighTide()
     {
         AM.PlaySound(highTideSound);
-    }
-
-    public void StartGame()
-    {
-        AM.PlaySound(startGameSound);
-    }
+    }    
 
     public void GameOver()
     {
