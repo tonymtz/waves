@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WaveController : MonoBehaviour
 {
@@ -27,11 +28,16 @@ public class WaveController : MonoBehaviour
     [SerializeField]
     private float digestTime = 30f;
 
+    [SerializeField]
+    private int happinessAdded;
+
     private int trashInWorld;
 
     private float timeleft;
 
     private bool isGameOver;
+
+    private bool hasGameStarted;
 
     public int TrashInWorld
     {
@@ -62,6 +68,27 @@ public class WaveController : MonoBehaviour
         }
     }
 
+    public bool HasGameStarted
+    {
+        get
+        {
+            return hasGameStarted;
+        }
+    }
+
+    public int HappinessAdded
+    {
+        get
+        {
+            return happinessAdded;
+        }
+
+        set
+        {
+            happinessAdded = value;
+        }
+    }
+
     private void Awake()
     {
         isTimerPaused = false;
@@ -71,6 +98,25 @@ public class WaveController : MonoBehaviour
 
     private void Update()
     {
+        if (!hasGameStarted)
+        {
+            if (Input.GetButtonDown("Action"))
+            {
+                hasGameStarted = true;
+            }
+
+            return;
+        }
+
+        if (isGameOver)
+        {
+            if (Input.GetButtonDown("Action"))
+            {
+                RestartScene();
+            }
+            return;
+        }
+
         if (isTimerPaused) { return; }
 
         timeleft -= Time.deltaTime;
@@ -130,7 +176,7 @@ public class WaveController : MonoBehaviour
 
     private void RestartScene()
     {
-        Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void GameOver()
@@ -138,7 +184,6 @@ public class WaveController : MonoBehaviour
         if (isGameOver) { return; }
         isGameOver = true;
         PLAYER.GameOver();
-        Invoke("RestartScene", 4f);
     }
 
     [System.Serializable]

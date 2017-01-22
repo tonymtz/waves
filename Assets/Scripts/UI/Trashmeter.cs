@@ -15,6 +15,6 @@ public class Trashmeter : MonoBehaviour
 
     private void LateUpdate()
     {
-        mySlider.value = PLAYER.GarbageCollected;
+        mySlider.value = PLAYER.GarbageCollected * 100 / PLAYER.BackpackCapacity;
     }
 }

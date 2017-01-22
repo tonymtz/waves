@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
 
     private int garbageCollected;
 
+    private float speedAdded;
+
+    [SerializeField]
+    private float backpackCapacity;
+
     [SerializeField]
     private Animator myAnimator;
 
@@ -30,6 +35,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public float SpeedAdded
+    {
+        get
+        {
+            return speedAdded;
+        }
+    }
+
+    public float BackpackCapacity
+    {
+        get
+        {
+            return backpackCapacity;
+        }
+    }
+
     private void Awake()
     {
         myRigidbody = GetComponent<Rigidbody>();
@@ -37,11 +58,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (!WC.HasGameStarted) { return; }
+
+        if (isActioning) { return; }
+
         float axisHorizontal = Input.GetAxis("Horizontal");
         float axisVertical = Input.GetAxis("Vertical");
         bool isActionButton = Input.GetButtonDown("Action");
-
-        if (isActioning) { return; }
 
         if (isActionButton)
         {
@@ -58,11 +81,12 @@ public class Player : MonoBehaviour
         Vector3 newDir = Vector3.RotateTowards(transform.forward, new Vector3(axisHorizontal, 0f, axisVertical), rotatingSpeed * Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
         bool isMoving = false;
+        float movementSpeedNet = movementSpeed + (speedAdded - garbageCollected) * 25;
 
         if (axisHorizontal != 0f)
         {
             myRigidbody.velocity = new Vector3(
-                axisHorizontal * movementSpeed * Time.deltaTime,
+                axisHorizontal * movementSpeedNet * Time.deltaTime,
                 myRigidbody.velocity.y,
                 myRigidbody.velocity.z
             );
@@ -74,7 +98,7 @@ public class Player : MonoBehaviour
             myRigidbody.velocity = new Vector3(
                 myRigidbody.velocity.x,
                 myRigidbody.velocity.y,
-                axisVertical * movementSpeed * Time.deltaTime
+                axisVertical * movementSpeedNet * Time.deltaTime
             );
             isMoving = true;
         }
@@ -91,7 +115,7 @@ public class Player : MonoBehaviour
         isActioning = true;
         Invoke("ActionTeardown", 0.25f);
 
-        if (itemSelected && garbageCollected < 11)
+        if (itemSelected && garbageCollected < backpackCapacity)
         {
             Destroy(itemSelected);
             WC.TrashInWorld--;
@@ -120,6 +144,21 @@ public class Player : MonoBehaviour
         else if (other.gameObject.tag == "LyingGuy")
         {
             other.GetComponent<LyingGuy>().Complain();
+        }
+        else if (other.gameObject.tag == "Coin")
+        {
+            WC.HappinessAdded++;
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Flipflops")
+        {
+            speedAdded++;
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.tag == "Backpack")
+        {
+            backpackCapacity++;
+            Destroy(other.gameObject);
         }
     }
 
