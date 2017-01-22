@@ -3,6 +3,13 @@
 public class WaveController : MonoBehaviour
 {
     [SerializeField]
+    private Level[] levels;
+
+    private int currentLevel = -1;
+
+    private int wavesCounter = 0;
+
+    [SerializeField]
     private WaterController water;
 
     [SerializeField]
@@ -54,6 +61,7 @@ public class WaveController : MonoBehaviour
     {
         isTimerPaused = false;
         trashInWorld = 0;
+        FinishRound();
     }
 
     private void Update()
@@ -64,8 +72,8 @@ public class WaveController : MonoBehaviour
 
         if (timeleft <= 0)
         {
-            timeleft = digestTime;
             Digest();
+            timeleft = digestTime;
         }
     }
 
@@ -91,5 +99,35 @@ public class WaveController : MonoBehaviour
     private void ResetWater()
     {
         water.IsHighTide = false;
+        wavesCounter++;
+
+        if (wavesCounter >= levels[currentLevel].wavesBeforeNextLvl)
+        {
+            FinishRound();
+        }
+    }
+
+    private void FinishRound()
+    {
+        currentLevel++;
+
+        if (currentLevel >= levels.Length)
+        {
+            currentLevel = levels.Length - 1;
+        }
+
+        Level myLevel = levels[currentLevel];
+
+        trashWaveSize = myLevel.trashToThrow;
+        digestTime = myLevel.timeBetweenWaves;
+        wavesCounter = 0;
+    }
+
+    [System.Serializable]
+    public class Level
+    {
+        public int trashToThrow;
+        public int timeBetweenWaves;
+        public int wavesBeforeNextLvl;
     }
 }

@@ -90,16 +90,20 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "LyingGuy")
-        {
-            other.GetComponent<LyingGuy>().Complain();
-        }
-        else if (other.gameObject.layer == 10) // Trash
+        if (other.gameObject.layer == 10) // Trash
         {
             if (itemSelected == null)
             {
                 itemSelected = other.gameObject;
             }
+        }
+        else if (other.gameObject.tag == "TrashCan")
+        {
+            garbageCollected = 0;
+        }
+        else if (other.gameObject.tag == "LyingGuy")
+        {
+            other.GetComponent<LyingGuy>().Complain();
         }
     }
 
